@@ -15,14 +15,18 @@ interface ContentInputProps {
 export default function ContentInput({
   title: initialTitle = "",
   content: initialContent = "",
-  selectedPlatforms: initialPlatforms = [],
+  selectedPlatforms: initialPlatforms = ["twitter", "linkedin", "instagram"],
   onTitleChange,
   onContentChange,
   onPlatformsChange,
 }: ContentInputProps) {
   const [title, setTitle] = useState(initialTitle);
   const [content, setContent] = useState(initialContent);
-  const [platforms, setPlatforms] = useState<string[]>(initialPlatforms);
+  const [platforms, setPlatforms] = useState<string[]>(
+    initialPlatforms.length > 0
+      ? initialPlatforms
+      : ["twitter", "linkedin", "instagram"]
+  );
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;

@@ -8,7 +8,11 @@ import { useState } from "react";
 export default function CreatePage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([
+    "twitter",
+    "linkedin",
+    "instagram",
+  ]);
 
   const handleGenerate = () => {
     // TODO: Implement AI generation logic
