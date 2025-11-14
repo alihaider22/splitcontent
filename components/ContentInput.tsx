@@ -60,7 +60,7 @@ export default function ContentInput({
           value={title}
           onChange={handleTitleChange}
           placeholder="Enter a title for your content"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors text-gray-900 placeholder:text-gray-400"
         />
       </div>
 
@@ -78,7 +78,7 @@ export default function ContentInput({
           onChange={handleContentChange}
           placeholder="Paste your blog post, newsletter, transcript, or any long-form content here..."
           rows={12}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors resize-y"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors resize-y text-gray-900 placeholder:text-gray-400"
         />
       </div>
 
