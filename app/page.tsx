@@ -2,8 +2,6 @@
 
 import Button from "@/components/Button";
 import Card from "@/components/Card";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import {
   FileText,
   Sparkles,
@@ -23,9 +21,7 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
-
+    <>
       {/* Hero Section */}
       <section className="flex-1 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -39,8 +35,8 @@ export default function Page() {
               Instagram—instantly.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button variant="primary" href="/sign-up">
-                Get Started Free
+              <Button variant="primary" href="/create">
+                Start Creating Posts
               </Button>
               <Button variant="secondary" onClick={scrollToDemo}>
                 See How It Works
@@ -256,15 +252,13 @@ export default function Page() {
           </h2>
           <Button
             variant="primary"
-            href="/sign-up"
+            href="/create"
             className="text-lg px-8 py-4"
           >
             Start Creating Posts
           </Button>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }
