@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Button from "./Button";
@@ -27,14 +27,15 @@ export default function Navbar() {
               <UserButton afterSignOutUrl="/" />
             ) : (
               <>
-                <SignInButton mode="modal">
-                  <button className="px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors">
-                    Sign In
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <Button variant="primary">Get Started</Button>
-                </SignUpButton>
+                <Link
+                  href="/sign-in"
+                  className="px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+                >
+                  Sign In
+                </Link>
+                <Button variant="primary" href="/sign-up">
+                  Get Started
+                </Button>
               </>
             )}
           </div>
@@ -63,16 +64,15 @@ export default function Navbar() {
                 </div>
               ) : (
                 <>
-                  <SignInButton mode="modal">
-                    <button className="w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors">
-                      Sign In
-                    </button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <Button variant="primary" className="w-full">
-                      Get Started
-                    </Button>
-                  </SignUpButton>
+                  <Link
+                    href="/sign-in"
+                    className="w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+                  >
+                    Sign In
+                  </Link>
+                  <Button variant="primary" href="/sign-up" className="w-full">
+                    Get Started
+                  </Button>
                 </>
               )}
             </div>
