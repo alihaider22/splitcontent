@@ -3,9 +3,13 @@
 import ContentInput from "@/components/ContentInput";
 import Button from "@/components/Button";
 import { Sparkles } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function CreatePage() {
+  const { isSignedIn, isLoaded } = useUser();
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([
@@ -13,6 +17,12 @@ export default function CreatePage() {
     "linkedin",
     "instagram",
   ]);
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push("/");
+    }
+  }, [isLoaded, isSignedIn, router]);
 
   const handleGenerate = () => {
     // TODO: Implement AI generation logic
@@ -22,6 +32,11 @@ export default function CreatePage() {
       platforms: selectedPlatforms,
     });
   };
+
+  // Show nothing while checking authentication
+  if (!isLoaded || !isSignedIn) {
+    return null;
+  }
 
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8">
