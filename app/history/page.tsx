@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { getUserHistory } from "@/services/historyService";
 import { GeneratedPost } from "@/types/database";
 import GeneratedPosts from "@/components/GeneratedPosts";
-import { Loader2, Calendar, FileText } from "lucide-react";
+import { Loader2, Calendar, FileText, Search } from "lucide-react";
 import Card from "@/components/Card";
 
 export default function HistoryPage() {
@@ -15,6 +15,22 @@ export default function HistoryPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedPost, setSelectedPost] = useState<GeneratedPost | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter history based on search query
+  const filteredHistory = history.filter((post) =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Clear selected post if it's not in filtered results
+  useEffect(() => {
+    if (
+      selectedPost &&
+      !filteredHistory.find((post) => post.id === selectedPost.id)
+    ) {
+      setSelectedPost(null);
+    }
+  }, [filteredHistory, selectedPost]);
 
   useEffect(() => {
     if (isLoaded && !isSignedIn) {
@@ -93,40 +109,73 @@ export default function HistoryPage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left Side - History List */}
-            <div className="lg:col-span-1 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto p-2">
-              {history.map((post) => (
-                <Card
-                  key={post.id}
-                  className={`cursor-pointer transition-all ${
-                    selectedPost?.id === post.id
-                      ? "ring-2 ring-blue-600 shadow-lg"
-                      : "hover:shadow-md"
-                  }`}
-                  onClick={() => setSelectedPost(post)}
-                >
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-gray-900 line-clamp-2">
-                      {post.title}
-                    </h3>
-                    <div className="flex items-center text-sm text-gray-500 space-x-4">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="h-4 w-4" />
-                        <span>{formatDate(post.created_at)}</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {post.platforms.map((platform) => (
-                        <span
-                          key={platform}
-                          className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded"
-                        >
-                          {platform}
-                        </span>
-                      ))}
-                    </div>
+            <div className="lg:col-span-1 space-y-4">
+              {/* Search Input */}
+              <div className="relative px-2">
+                <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search by title..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none text-gray-900 placeholder:text-gray-400"
+                />
+              </div>
+
+              {/* Results count */}
+              {searchQuery && (
+                <p className="text-sm text-gray-600">
+                  {filteredHistory.length} result
+                  {filteredHistory.length !== 1 ? "s" : ""} found
+                </p>
+              )}
+
+              {/* History List */}
+              <div className="max-h-[calc(100vh-20rem)] overflow-y-auto space-y-4 p-2">
+                {filteredHistory.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500 text-sm">
+                      {searchQuery
+                        ? "No posts found matching your search"
+                        : "No posts yet"}
+                    </p>
                   </div>
-                </Card>
-              ))}
+                ) : (
+                  filteredHistory.map((post) => (
+                    <Card
+                      key={post.id}
+                      className={`cursor-pointer transition-all ${
+                        selectedPost?.id === post.id
+                          ? "ring-2 ring-blue-600 shadow-lg"
+                          : "hover:shadow-md"
+                      }`}
+                      onClick={() => setSelectedPost(post)}
+                    >
+                      <div className="space-y-2">
+                        <h3 className="font-semibold text-gray-900 line-clamp-2">
+                          {post.title}
+                        </h3>
+                        <div className="flex items-center text-sm text-gray-500 space-x-4">
+                          <div className="flex items-center space-x-1">
+                            <Calendar className="h-4 w-4" />
+                            <span>{formatDate(post.created_at)}</span>
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {post.platforms.map((platform) => (
+                            <span
+                              key={platform}
+                              className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded"
+                            >
+                              {platform}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </Card>
+                  ))
+                )}
+              </div>
             </div>
 
             {/* Right Side - Selected Post Details */}
