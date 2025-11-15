@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { auth } from "@clerk/nextjs/server";
+import { createSupabaseClient } from "@/lib/supabase";
+import { CreatePostData } from "@/types/database";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -67,7 +69,37 @@ Generate the post now:`;
       posts[platform] = completion.choices[0]?.message?.content?.trim() || "";
     }
 
-    return NextResponse.json({ posts });
+    // Save to Supabase
+    const supabase = await createSupabaseClient();
+    const postData: CreatePostData = {
+      user_id: userId,
+      title: title || "Untitled",
+      original_content: content,
+      posts: posts,
+      platforms: platforms,
+    };
+
+    const { data: savedPost, error: dbError } = await supabase
+      .from("generated_posts")
+      .insert([postData])
+      .select()
+      .single();
+
+    if (dbError) {
+      console.error("Database error:", dbError);
+      // Still return the posts even if saving fails
+      return NextResponse.json({
+        posts,
+        saved: false,
+        error: "Posts generated but failed to save to history",
+      });
+    }
+
+    return NextResponse.json({
+      posts,
+      saved: true,
+      postId: savedPost.id,
+    });
   } catch (error) {
     console.error("OpenAI API error:", error);
 

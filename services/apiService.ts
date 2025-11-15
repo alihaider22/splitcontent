@@ -6,6 +6,9 @@ export interface GeneratePostsParams {
 
 export interface GeneratePostsResponse {
   posts: Record<string, string>;
+  saved?: boolean;
+  postId?: string;
+  error?: string;
 }
 
 /**
