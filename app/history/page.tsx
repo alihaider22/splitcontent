@@ -93,7 +93,7 @@ export default function HistoryPage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left Side - History List */}
-            <div className="lg:col-span-1 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
+            <div className="lg:col-span-1 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto p-2">
               {history.map((post) => (
                 <Card
                   key={post.id}
