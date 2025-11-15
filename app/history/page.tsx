@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import { getUserHistory } from "@/services/historyService";
 import { GeneratedPost } from "@/types/database";
 import GeneratedPosts from "@/components/GeneratedPosts";
@@ -10,7 +8,6 @@ import { Loader2, Calendar, FileText, Search } from "lucide-react";
 import Card from "@/components/Card";
 
 export default function HistoryPage() {
-  const { isSignedIn, isLoaded } = useUser();
   const [history, setHistory] = useState<GeneratedPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -33,37 +30,25 @@ export default function HistoryPage() {
   }, [filteredHistory, selectedPost]);
 
   useEffect(() => {
-    if (isLoaded && !isSignedIn) {
-      redirect("/sign-in?redirect_url=/history");
-    }
-  }, [isLoaded, isSignedIn]);
-
-  useEffect(() => {
-    if (isLoaded && isSignedIn) {
-      fetchHistory();
-    }
-  }, [isLoaded, isSignedIn]);
-
-  const fetchHistory = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const data = await getUserHistory();
-      if (data.error) {
-        setError(data.error);
-      } else {
-        setHistory(data.posts);
+    const fetchHistory = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const data = await getUserHistory();
+        if (data.error) {
+          setError(data.error);
+        } else {
+          setHistory(data.posts);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load history");
+      } finally {
+        setIsLoading(false);
       }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load history");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    };
 
-  if (!isLoaded || !isSignedIn) {
-    return null;
-  }
+    fetchHistory();
+  }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
