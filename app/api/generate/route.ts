@@ -70,7 +70,7 @@ Generate the post now:`;
     }
 
     // Save to Supabase
-    const supabase = await createSupabaseClient();
+    const supabase = createSupabaseClient();
     const postData: CreatePostData = {
       user_id: userId,
       title: title || "Untitled",
