@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -8,7 +9,10 @@ import Button from "./Button";
 
 export default function Navbar() {
   const { isSignedIn } = useUser();
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -24,7 +28,29 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
             {isSignedIn ? (
-              <UserButton afterSignOutUrl="/" />
+              <>
+                <Link
+                  href="/create"
+                  className={`px-4 py-2 transition-colors ${
+                    isActive("/create")
+                      ? "text-blue-600 font-semibold"
+                      : "text-gray-700 hover:text-blue-600"
+                  }`}
+                >
+                  Generate Posts
+                </Link>
+                <Link
+                  href="/history"
+                  className={`px-4 py-2 transition-colors ${
+                    isActive("/history")
+                      ? "text-blue-600 font-semibold"
+                      : "text-gray-700 hover:text-blue-600"
+                  }`}
+                >
+                  History
+                </Link>
+                <UserButton afterSignOutUrl="/" />
+              </>
             ) : (
               <>
                 <Link
@@ -59,9 +85,31 @@ export default function Navbar() {
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
               {isSignedIn ? (
-                <div className="flex justify-center">
-                  <UserButton afterSignOutUrl="/" />
-                </div>
+                <>
+                  <Link
+                    href="/create"
+                    className={`w-full text-left px-4 py-2 transition-colors ${
+                      isActive("/create")
+                        ? "text-blue-600 font-semibold bg-blue-50"
+                        : "text-gray-700 hover:text-blue-600"
+                    }`}
+                  >
+                    Generate Posts
+                  </Link>
+                  <Link
+                    href="/history"
+                    className={`w-full text-left px-4 py-2 transition-colors ${
+                      isActive("/history")
+                        ? "text-blue-600 font-semibold bg-blue-50"
+                        : "text-gray-700 hover:text-blue-600"
+                    }`}
+                  >
+                    History
+                  </Link>
+                  <div className="flex justify-center">
+                    <UserButton afterSignOutUrl="/" />
+                  </div>
+                </>
               ) : (
                 <>
                   <Link
