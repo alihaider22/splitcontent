@@ -45,31 +45,25 @@ export default function Page() {
 
             {/* Hero Illustration */}
             <div className="mt-16 flex justify-center items-center space-x-8 sm:space-x-12">
-              <div className="flex flex-col items-center">
-                <div className="bg-blue-100 rounded-lg p-6 mb-4">
-                  <FileText className="h-12 w-12 text-blue-600" />
-                </div>
-                <p className="text-sm text-gray-600">Your Content</p>
+              <div className="bg-blue-100 rounded-lg p-6 flex flex-col items-center justify-center min-w-[140px]">
+                <FileText className="h-12 w-12 text-blue-600 mb-2" />
+                <p className="text-sm font-medium text-blue-600 text-center">
+                  Your Content
+                </p>
               </div>
               <div className="text-blue-600 text-2xl font-bold">→</div>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                <div className="flex flex-col items-center">
-                  <div className="bg-blue-100 rounded-lg p-4 mb-2">
-                    <Twitter className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <p className="text-xs text-gray-600">Twitter</p>
+                <div className="bg-blue-100 rounded-lg p-4 flex flex-col items-center justify-center min-w-[100px]">
+                  <Twitter className="h-8 w-8 text-blue-600 mb-2" />
+                  <p className="text-xs font-medium text-blue-600">Twitter</p>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className="bg-blue-100 rounded-lg p-4 mb-2">
-                    <Linkedin className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <p className="text-xs text-gray-600">LinkedIn</p>
+                <div className="bg-blue-100 rounded-lg p-4 flex flex-col items-center justify-center min-w-[100px]">
+                  <Linkedin className="h-8 w-8 text-blue-600 mb-2" />
+                  <p className="text-xs font-medium text-blue-600">LinkedIn</p>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className="bg-blue-100 rounded-lg p-4 mb-2">
-                    <Instagram className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <p className="text-xs text-gray-600">Instagram</p>
+                <div className="bg-blue-100 rounded-lg p-4 flex flex-col items-center justify-center min-w-[100px]">
+                  <Instagram className="h-8 w-8 text-blue-600 mb-2" />
+                  <p className="text-xs font-medium text-blue-600">Instagram</p>
                 </div>
               </div>
             </div>
