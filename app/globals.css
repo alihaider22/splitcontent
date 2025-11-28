@@ -10,6 +10,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Brand Colors - Charcoal + Soft Mint */
+  --color-brand: #2dd4bf; /* teal-400 - Primary */
+  --color-brand-light: #ccfbf1; /* teal-100 - Primary Light */
+  --color-brand-dark: #14b8a6; /* teal-500 - Primary Dark (for hover states) */
 }
 
 @media (prefers-color-scheme: dark) {

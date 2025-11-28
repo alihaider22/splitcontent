@@ -20,7 +20,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold text-blue-600">
+            <span className="text-2xl font-bold text-teal-400">
               SplitContent
             </span>
           </Link>
@@ -33,8 +33,8 @@ export default function Navbar() {
                   href="/create"
                   className={`px-4 py-2 transition-colors ${
                     isActive("/create")
-                      ? "text-blue-600 font-semibold"
-                      : "text-gray-700 hover:text-blue-600"
+                      ? "text-teal-400 font-semibold"
+                      : "text-gray-700 hover:text-teal-400"
                   }`}
                 >
                   Generate Posts
@@ -43,8 +43,8 @@ export default function Navbar() {
                   href="/history"
                   className={`px-4 py-2 transition-colors ${
                     isActive("/history")
-                      ? "text-blue-600 font-semibold"
-                      : "text-gray-700 hover:text-blue-600"
+                      ? "text-teal-400 font-semibold"
+                      : "text-gray-700 hover:text-teal-400"
                   }`}
                 >
                   History
@@ -55,7 +55,7 @@ export default function Navbar() {
               <>
                 <Link
                   href="/sign-in"
-                  className="px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+                  className="px-4 py-2 text-gray-700 hover:text-teal-400 transition-colors"
                 >
                   Sign In
                 </Link>
@@ -90,8 +90,8 @@ export default function Navbar() {
                     href="/create"
                     className={`w-full text-left px-4 py-2 transition-colors ${
                       isActive("/create")
-                        ? "text-blue-600 font-semibold bg-blue-50"
-                        : "text-gray-700 hover:text-blue-600"
+                        ? "text-teal-400 font-semibold bg-teal-50"
+                        : "text-gray-700 hover:text-teal-400"
                     }`}
                   >
                     Generate Posts
@@ -100,8 +100,8 @@ export default function Navbar() {
                     href="/history"
                     className={`w-full text-left px-4 py-2 transition-colors ${
                       isActive("/history")
-                        ? "text-blue-600 font-semibold bg-blue-50"
-                        : "text-gray-700 hover:text-blue-600"
+                        ? "text-teal-400 font-semibold bg-teal-50"
+                        : "text-gray-700 hover:text-teal-400"
                     }`}
                   >
                     History
@@ -114,7 +114,7 @@ export default function Navbar() {
                 <>
                   <Link
                     href="/sign-in"
-                    className="w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+                    className="w-full text-left px-4 py-2 text-gray-700 hover:text-teal-400 transition-colors"
                   >
                     Sign In
                   </Link>
