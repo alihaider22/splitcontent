@@ -129,7 +129,7 @@ export default function HistoryPage() {
                   filteredHistory.map((post) => (
                     <Card
                       key={post.id}
-                      className={`cursor-pointer transition-all ${
+                      className={`cursor-pointer transition-all p-4 ${
                         selectedPost?.id === post.id
                           ? "ring-2 ring-teal-400 shadow-lg"
                           : "hover:shadow-md"
