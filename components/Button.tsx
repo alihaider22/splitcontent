@@ -21,14 +21,14 @@ export default function Button({
   disabled = false,
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-colors duration-200";
+    "inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold transition-all duration-200";
   const variants = {
     primary: disabled
-      ? "bg-gray-400 text-white cursor-not-allowed"
-      : "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800",
+      ? "bg-gray-400 text-white cursor-not-allowed shadow-none"
+      : "bg-teal-400 text-white hover:bg-teal-500 active:bg-teal-600 shadow-md hover:shadow-lg",
     secondary: disabled
-      ? "bg-gray-100 text-gray-400 border-2 border-gray-300 cursor-not-allowed"
-      : "bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50 active:bg-blue-100",
+      ? "bg-gray-100 text-gray-400 border-2 border-gray-300 cursor-not-allowed shadow-none"
+      : "bg-white text-teal-500 border border-teal-400 hover:bg-gray-50 active:bg-gray-100 shadow-sm",
   };
 
   const combinedClassName = `${baseStyles} ${variants[variant]} ${className}`;

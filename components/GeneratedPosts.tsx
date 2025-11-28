@@ -41,14 +41,14 @@ export default function GeneratedPosts({ posts }: GeneratedPostsProps) {
           <Card key={platform}>
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center space-x-2">
-                <div className="text-blue-600">{platformIcons[platform]}</div>
+                <div className="text-teal-400">{platformIcons[platform]}</div>
                 <h3 className="text-lg font-semibold text-gray-900">
                   {platformNames[platform]}
                 </h3>
               </div>
               <button
                 onClick={() => handleCopy(platform, post)}
-                className="flex items-center space-x-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                className="flex items-center space-x-2 px-4 py-2 text-sm text-teal-400 hover:bg-teal-50 rounded-lg transition-colors"
               >
                 {copiedPlatform === platform ? (
                   <>

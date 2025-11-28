@@ -75,7 +75,7 @@ export default function HistoryPage() {
 
         {isLoading ? (
           <div className="flex justify-center items-center py-20">
-            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+            <Loader2 className="h-8 w-8 animate-spin text-teal-400" />
           </div>
         ) : error ? (
           <div className="bg-red-50 border border-red-200 rounded-lg p-6">
@@ -103,7 +103,7 @@ export default function HistoryPage() {
                   placeholder="Search by title..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none text-gray-900 placeholder:text-gray-400"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-400 focus:border-teal-400 outline-none text-gray-900 placeholder:text-gray-400"
                 />
               </div>
 
@@ -129,9 +129,9 @@ export default function HistoryPage() {
                   filteredHistory.map((post) => (
                     <Card
                       key={post.id}
-                      className={`cursor-pointer transition-all ${
+                      className={`cursor-pointer transition-all p-4 ${
                         selectedPost?.id === post.id
-                          ? "ring-2 ring-blue-600 shadow-lg"
+                          ? "ring-2 ring-teal-400 shadow-lg"
                           : "hover:shadow-md"
                       }`}
                       onClick={() => setSelectedPost(post)}
@@ -150,7 +150,7 @@ export default function HistoryPage() {
                           {post.platforms.map((platform) => (
                             <span
                               key={platform}
-                              className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded"
+                              className="px-2 py-1 text-xs font-medium bg-teal-100 text-teal-700 rounded"
                             >
                               {platform}
                             </span>
